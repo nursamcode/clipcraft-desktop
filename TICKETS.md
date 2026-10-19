@@ -23,9 +23,9 @@ Fork dari `storytold/filmcraft` yang dimodifikasi menjadi Studio NLE Mandiri den
 - [x] Add new custom vector/SVG application icons.
 
 ### [DESKTOP-02] UI Theme & Styling Preservation
-- [ ] Retain FilmCraft's native dark slate/obsidian palette in `crates/ui-egui/src/theme.rs`.
-- [ ] Absorb theme design tokens (margins, font hierarchies, panel frames) into internal guidelines.
-- [ ] Ensure consistent aesthetic harmony across all stock and custom panels.
+- [x] Retain FilmCraft's native dark slate/obsidian palette in `crates/ui-egui/src/theme.rs`.
+- [x] Absorb theme design tokens (margins, font hierarchies, panel frames) into internal guidelines.
+- [x] Ensure consistent aesthetic harmony across all stock and custom panels.
 
 ### [DESKTOP-03] Custom Panel: AI Clipper (`ai_clipper.rs`)
 - [ ] Create dockable panel module in `crates/ui-egui/src/panels/ai_clipper.rs`.
