@@ -28,9 +28,9 @@ Fork dari `storytold/filmcraft` yang dimodifikasi menjadi Studio NLE Mandiri den
 - [x] Ensure consistent aesthetic harmony across all stock and custom panels.
 
 ### [DESKTOP-03] Custom Panel: AI Clipper (`ai_clipper.rs`)
-- [ ] Create dockable panel module in `crates/ui-egui/src/panels/ai_clipper.rs`.
-- [ ] Register panel in dock registry (`crates/ui-egui/src/dock.rs` and `panels/mod.rs`).
-- [ ] Design panel UI components:
+- [x] Create dockable panel module in `crates/ui-egui/src/panels/ai_clipper.rs`.
+- [x] Register panel in dock registry (`crates/ui-egui/src/dock.rs` and `panels/mod.rs`).
+- [x] Design panel UI components:
   - Input field: YouTube URL / Local media selection.
   - Dropdown options: Content Genre (`Podcast Duo`, `Solo Creator`, `Gaming Stream`).
   - Threshold slider: Virality Score cut-off (default: `90`).

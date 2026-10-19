@@ -37,6 +37,8 @@ web-time = "1"
 unicode-bidi = "0.3.18"
 # ArtCraft wordmark (PNG) for the About dialog and Home screen.
 image = { version = "0.25", default-features = false, features = ["png"] }
+open = "5"
+ureq = { version = "3", default-features = false, features = ["json", "platform-verifier"] }
 
 # Thread/process CPU clocks for frame-job profiling (safe wrappers; see frames.rs).
 [target.'cfg(unix)'.dependencies]

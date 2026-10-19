@@ -14,8 +14,57 @@ pub struct PanelsState {
     pub reference: ReferenceState,
     pub events: EventsState,
     pub progress: ProgressState,
+    pub ai_clipper: AiClipperState,
     /// Preferred selection for Metadata and Info; inspector focus does not replace it.
     pub inspector_source: InspectorSource,
+}
+
+#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+pub struct AiClipperState {
+    pub source_url: String,
+    pub content_genre: String,
+    pub min_virality_score: i32,
+    pub api_endpoint: String,
+    pub active_job_id: Option<String>,
+    pub status: String,
+    pub progress: i32,
+    pub current_step: String,
+    pub error_message: Option<String>,
+    pub clips: Vec<AiClipItem>,
+}
+
+impl Default for AiClipperState {
+    fn default() -> Self {
+        Self {
+            source_url: String::new(),
+            content_genre: "duo".to_string(),
+            min_virality_score: 85,
+            api_endpoint: "https://clipper.ezuuk.my.id".to_string(),
+            active_job_id: None,
+            status: "IDLE".to_string(),
+            progress: 0,
+            current_step: String::new(),
+            error_message: None,
+            clips: Vec::new(),
+        }
+    }
+}
+
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+#[serde(default, rename_all = "camelCase")]
+pub struct AiClipItem {
+    pub id: String,
+    pub title: String,
+    pub reason: String,
+    pub description: String,
+    pub tags: String,
+    pub virality_score: i32,
+    pub start_sec: f64,
+    pub end_sec: f64,
+    pub duration_sec: f64,
+    pub layout_type: String,
+    pub video_url: String,
 }
 
 /// The last selection panel used by the item inspectors. Only the source is retained, so
