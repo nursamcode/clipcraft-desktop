@@ -26,6 +26,10 @@ enum WorkerMsg {
         endpoint: String,
         job_id: String,
     },
+    ListenSse {
+        endpoint: String,
+        job_id: String,
+    },
 }
 
 enum WorkerResponse {
@@ -73,8 +77,40 @@ fn get_worker() -> (&'static Sender<WorkerMsg>, Arc<Mutex<Receiver<WorkerRespons
                                 let mut reader = res.into_body();
                                 if let Ok(val) = serde_json::from_reader::<_, serde_json::Value>(reader.as_reader()) {
                                     if let Some(jid) = val["id"].as_str() {
+                                        let jid_str = jid.to_string();
                                         let _ = resp_tx.send(WorkerResponse::JobCreated {
-                                            job_id: jid.to_string(),
+                                            job_id: jid_str.clone(),
+                                        });
+                                        let sse_endpoint = endpoint.clone();
+                                        let resp_tx_sse = resp_tx.clone();
+                                        thread::spawn(move || {
+                                            let sse_url = format!("{}/api/v1/jobs/{}/events", sse_endpoint.trim_end_matches('/'), jid_str);
+                                            if let Ok(resp) = ureq::get(&sse_url).call() {
+                                                use std::io::BufRead;
+                                                let reader = std::io::BufReader::new(resp.into_body().as_reader());
+                                                for line in reader.lines().map_while(Result::ok) {
+                                                    if line.starts_with("data: ") {
+                                                        let json_str = &line["data: ".len()..];
+                                                        if let Ok(data) = serde_json::from_str::<serde_json::Value>(json_str) {
+                                                            let st = data["status"].as_str().unwrap_or("").to_string();
+                                                            let pr = data["progress"].as_i64().unwrap_or(0) as i32;
+                                                            let sp = data["step"].as_str().unwrap_or("").to_string();
+                                                            let er = data["error"].as_str().map(|s| s.to_string());
+                                                            let _ = resp_tx_sse.send(WorkerResponse::JobStatus {
+                                                                job_id: jid_str.clone(),
+                                                                status: st.clone(),
+                                                                progress: pr,
+                                                                current_step: sp,
+                                                                error: er,
+                                                                clips: Vec::new(),
+                                                            });
+                                                            if matches!(st.as_str(), "COMPLETED" | "FAILED") {
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         });
                                     }
                                 }

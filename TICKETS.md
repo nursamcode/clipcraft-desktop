@@ -55,9 +55,9 @@ Fork dari `storytold/filmcraft` yang dimodifikasi menjadi Studio NLE Mandiri den
   - Set sequence status feedback in application UI.
 
 ### [DESKTOP-06] Client-Side HTTP & SSE Bridge to `clipcraft-api`
-- [ ] Implement lightweight async HTTP client using `reqwest` / `ureq` in `crates/ui-egui/src/automation/`.
-- [ ] Connect to local/remote FastAPI backend (`https://api-clipcraft.ezuuk.my.id`).
-- [ ] Handle streaming Server-Sent Events (SSE) for non-blocking UI updates.
+- [x] Implement lightweight async HTTP client using `ureq` in `crates/ui-egui/src/panels/ai_clipper.rs`.
+- [x] Connect to production FastAPI backend (`https://clipper.ezuuk.my.id`).
+- [x] Handle streaming Server-Sent Events (SSE) for non-blocking UI updates and background polling.
 
 ### [DESKTOP-07] Multi-Platform Native Packaging & Release
 - [ ] Setup release build matrix for macOS (arm64 Apple Silicon & x86_64).
