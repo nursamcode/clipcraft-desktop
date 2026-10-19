@@ -60,6 +60,7 @@ Fork dari `storytold/filmcraft` yang dimodifikasi menjadi Studio NLE Mandiri den
 - [x] Handle streaming Server-Sent Events (SSE) for non-blocking UI updates and background polling.
 
 ### [DESKTOP-07] Multi-Platform Native Packaging & Release
-- [ ] Setup release build matrix for macOS (arm64 Apple Silicon & x86_64).
-- [ ] Setup Windows release packaging (MSI / Portable zip).
-- [ ] Setup Linux AppImage / Tarball bundle.
+- [x] Setup release build matrix for macOS (arm64 Apple Silicon & x86_64 universal).
+- [x] Setup Windows release packaging (x64 ZIP & binaries).
+- [x] Setup Linux packaging (x86_64 Tarball & binaries).
+- [x] Configure automated multi-platform release script (`packaging/release-matrix.sh`).
