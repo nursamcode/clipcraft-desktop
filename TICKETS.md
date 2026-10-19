@@ -17,10 +17,10 @@ Fork dari `storytold/filmcraft` yang dimodifikasi menjadi Studio NLE Mandiri den
 ## 📌 Tickets Breakdown
 
 ### [DESKTOP-01] Brand Sanitization & Project Rebrand
-- [ ] Remove all ArtCraft proprietary logos, trademarks, and branding assets in accordance with MIT/Apache-2.0 notice.
-- [ ] Rebrand binary identifiers, package names (`Cargo.toml`), and window titles to `ClipCraft Studio`.
-- [ ] Set application identifier: `id.ezuuk.clipcraft`.
-- [ ] Add new custom vector/SVG application icons.
+- [x] Remove all ArtCraft proprietary logos, trademarks, and branding assets in accordance with MIT/Apache-2.0 notice.
+- [x] Rebrand binary identifiers, package names (`Cargo.toml`), and window titles to `ClipCraft Studio`.
+- [x] Set application identifier: `id.ezuuk.clipcraft`.
+- [x] Add new custom vector/SVG application icons.
 
 ### [DESKTOP-02] UI Theme & Styling Preservation
 - [ ] Retain FilmCraft's native dark slate/obsidian palette in `crates/ui-egui/src/theme.rs`.
