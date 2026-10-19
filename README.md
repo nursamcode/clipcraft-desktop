@@ -8,32 +8,22 @@
 </p>
 
 
-<h1 align="center">FilmCraft</h1>
+<h1 align="center">ClipCraft Studio</h1>
 
 <p align="center">
-  <b>Video editing, color and sound; an open-source, clean-room reimplementation of Adobe Premiere Pro, rebuilt in pure Rust.</b>
+  <b>Autonomous AI Non-Linear Video Editor &amp; Vertical Shorts Studio, rebuilt in pure Rust.</b>
 </p>
 
 <p align="center">
-  An open-source, clean-room take on the Adobe Premiere Pro workflow: native on macOS, Windows and Linux, and in the browser via WebAssembly.<br>
-  By the ArtCraft team.
+  Desktop NLE with integrated AI Auto-Clipper, YouTube ingestion, 9:16 vertical workspace, and direct FilmCraft timeline engine.<br>
+  Native on macOS (Apple Silicon M1/M2/M3/M4 &amp; Intel), Windows, and Linux.
 </p>
 
 <p align="center">
   <a href="#license-and-credits"><img alt="License: MIT OR Apache-2.0" src="https://img.shields.io/badge/license-MIT%20%7C%20Apache--2.0-8b5cf6"></a>
   <img alt="Written in pure Rust" src="https://img.shields.io/badge/pure-Rust-6a3fd6?logo=rust&logoColor=white">
   <img alt="Runs on macOS, Windows and Linux" src="https://img.shields.io/badge/runs%20on-macOS%20%7C%20Windows%20%7C%20Linux-8b5cf6">
-  <a href="#status"><img alt="Status: young and moving fast" src="https://img.shields.io/badge/status-young%20and%20moving%20fast-6a3fd6"></a>
-</p>
-
-<p align="center">
-  <a href="https://discord.gg/artcraft"><img alt="Join the ArtCraft community on Discord" src="https://img.shields.io/badge/Join%20us%20on%20Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" height="40"></a>
-</p>
-
-<p align="center">
-  <a href="https://getartcraft.com/apps/filmcraft"><b>FilmCraft on getartcraft.com</b></a> ·
-  <a href="https://getartcraft.com/">ArtCraft</a> ·
-  <a href="https://getartcraft.com/apps">All Crafting Apps</a>
+  <a href="https://clipper.ezuuk.my.id"><img alt="AI Engine" src="https://img.shields.io/badge/AI%20Engine-clipper.ezuuk.my.id-7c3aed"></a>
 </p>
 
 <br>
@@ -246,20 +236,59 @@ The trailer and the grades in these screenshots were built exactly this way, by 
 
 <br>
 
-## Get started
+## Quick Start & Installation
 
+### 🍎 Install & Run on macOS (Apple Silicon M1 / M2 / M3 / M4)
+
+ClipCraft Studio runs natively on Apple Silicon with full hardware Metal GPU acceleration.
+
+#### 1. Install Prerequisites
+Buka Terminal di macOS dan install Xcode Command Line Tools & Rust:
 ```sh
-cargo run --release -p filmcraft                           # the desktop app, with a demo project
-cargo run --release -p filmcraft -- --control 9876         # plus the JSON-lines control server
-cargo run --release -p filmcraft-cli -- commands           # list every engine command
-cargo run --release -p filmcraft-cli -- mcp                # MCP server (headless)
+# Install Command Line Tools (jika belum)
+xcode-select --install
+
+# Install Rust toolchain (pilih default 1)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source "$HOME/.cargo/env"
+
+# Pastikan target Apple Silicon aktif
+rustup target add aarch64-apple-darwin
 ```
 
-Japanese text in the interface and in titles comes from [craft-fonts](https://github.com/storytold/craft-fonts), an optional build input (release builds always include it; without it FilmCraft uses its own and the system's fonts):
+#### 2. Clone Repository & Build
+```sh
+git clone https://github.com/nursamcode/clipcraft-desktop.git
+cd clipcraft-desktop
+
+# Jalankan langsung dalam mode release (Metal GPU & AI Clipper aktif)
+cargo run --release -p filmcraft
+```
+
+#### 3. Build Standalone Binary / App Bundle
+Untuk membuat file binary siap pakai tanpa menjalankan cargo:
+```sh
+cargo build --release --target aarch64-apple-darwin -p filmcraft
+
+# Binary hasil build berada di:
+# target/aarch64-apple-darwin/release/filmcraft
+```
+
+*Tips*: Masuk ke workspace **"Shorts AI"** (Window ▸ Workspaces ▸ Shorts AI) untuk langsung membuka panel AI Clipper dan Program Monitor rasio 9:16 vertikal.
+
+---
+
+### 💻 Other Platforms (Windows & Linux)
 
 ```sh
-git clone https://github.com/storytold/craft-fonts ../craft-fonts
-CRAFT_FONTS_DIR="$PWD/../craft-fonts" cargo run --release -p filmcraft
+# Jalankan desktop app
+cargo run --release -p filmcraft
+
+# Jalankan dengan JSON-lines control server untuk automasi AI agent
+cargo run --release -p filmcraft -- --control 9876
+
+# CLI tool
+cargo run --release -p filmcraft-cli -- commands
 ```
 
 The control protocol is documented in [docs/control-protocol.md](docs/control-protocol.md). Stuck, or want to show what you made? Ask in [Discord](https://discord.gg/artcraft).
