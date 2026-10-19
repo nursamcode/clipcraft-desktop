@@ -40,8 +40,8 @@ Fork dari `storytold/filmcraft` yang dimodifikasi menjadi Studio NLE Mandiri den
   - Action buttons per card: `[Add to Sequence]` and `[Direct Quick Export]`.
 
 ### [DESKTOP-04] "Shorts AI" Workspace Preset (9:16 Vertical)
-- [ ] Register new workspace preset in `crates/ui-egui/src/dock.rs` alongside Assembly, Editing, Color, and Effects.
-- [ ] Configure default layout:
+- [x] Register new workspace preset in `crates/ui-egui/src/dock.rs` alongside Assembly, Editing, Color, and Effects.
+- [x] Configure default layout:
   - Left: Project Bin & Source Monitor.
   - Center: Program Monitor locked to 9:16 aspect ratio (`1080x1920`).
   - Right: Docked AI Clipper panel.

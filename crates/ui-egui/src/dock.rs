@@ -181,7 +181,7 @@ fn vsplit(size: SplitSize, a: DockNode, b: DockNode) -> DockNode {
     DockNode::Split { vertical: true, size, a: Box::new(a), b: Box::new(b) }
 }
 
-pub const WORKSPACES: [&str; 9] = ["Editing", "Assembly", "Color", "Effects", "Audio", "Captions and Graphics", "Learning", "Review", "All Panels"];
+pub const WORKSPACES: [&str; 10] = ["Shorts AI", "Editing", "Assembly", "Color", "Effects", "Audio", "Captions and Graphics", "Learning", "Review", "All Panels"];
 
 /// The user's workspaces file, beside `preferences.json` in the data directory.
 pub const WORKSPACES_FILE: &str = "workspaces.json";
@@ -317,6 +317,19 @@ pub fn workspace(name: &str) -> DockNode {
     use SplitSize::*;
     let bottom_editing = || hsplit(FixedA(64.0), tabs(&[Tools], 0), hsplit(FixedB(116.0), tabs(&[Timeline], 0), tabs(&[AudioMeters], 0)));
     match name {
+        "Shorts AI" => vsplit(
+            Ratio(0.60),
+            hsplit(
+                Ratio(0.28),
+                tabs(&[Project, MediaBrowser], 0),
+                hsplit(
+                    Ratio(0.48),
+                    tabs(&[Program, Source], 0),
+                    tabs(&[AiClipper, EffectControls, Text], 0),
+                ),
+            ),
+            bottom_editing(),
+        ),
         "Assembly" => vsplit(
             Ratio(0.52),
             hsplit(
