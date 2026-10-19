@@ -450,17 +450,39 @@ pub fn show(app: &mut FilmcraftApp, ui: &mut egui::Ui, rect: Rect) {
                                 if ui.add(add_btn).clicked() {
                                     // Ticket [DESKTOP-05]: Dispatch native engine commands to place 9:16 sequence
                                     let seq_name = format!("Shorts — {}", clip.title);
-                                    let _ = app.session.execute(
-                                        "sequence.new",
+                                    let res = app.session.execute(
+                                        "file.newSequence",
                                         json!({
                                             "name": seq_name,
                                             "width": 1080,
                                             "height": 1920,
-                                            "fps_num": 30,
-                                            "fps_den": 1
+                                            "fps": 30.0,
+                                            "video": 2,
+                                            "audio": 2
                                         }),
                                     );
-                                    app.ui.status = format!("9:16 Sequence dibuat: {}", clip.title);
+                                    if let Ok(_) = res {
+                                        let _ = app.session.execute(
+                                            "captions.newTrack",
+                                            json!({
+                                                "format": "Subtitle",
+                                                "name": "Auto Captions",
+                                                "language": "id"
+                                            }),
+                                        );
+                                        let _ = app.session.execute(
+                                            "captions.setStyle",
+                                            json!({
+                                                "track": "C1",
+                                                "size": 36.0,
+                                                "anchor": "middle",
+                                                "align": "center"
+                                            }),
+                                        );
+                                        app.ui.status = format!("9:16 Sequence berhasil dibuat: {}", clip.title);
+                                    } else if let Err(e) = res {
+                                        app.ui.status = format!("Gagal membuat sequence: {e}");
+                                    }
                                 }
 
                                 // Quick Export / Open link

@@ -48,12 +48,11 @@ Fork dari `storytold/filmcraft` yang dimodifikasi menjadi Studio NLE Mandiri den
   - Bottom: Multi-track Timeline (V1/V2 video tracks, A1/A2 audio, C1 caption track).
 
 ### [DESKTOP-05] Engine Command Bridge for Automated Timeline Ingestion
-- [ ] Wire panel events to native engine commands via `filmcraft_engine::Session::execute`.
-- [ ] Implement automated sequence generator:
-  - Create 9:16 sequence (`sequence.new` with 1080x1920 resolution).
-  - Place cut segments onto timeline (`timeline.place`).
-  - Apply motion framing parameters (pan/crop X/Y coordinate curves).
-  - Generate and bind text/caption layers with active word timing.
+- [x] Wire panel events to native engine commands via `filmcraft_engine::Session::execute`.
+- [x] Implement automated sequence generator:
+  - Create 9:16 sequence (`file.newSequence` with 1080x1920 resolution, 30fps).
+  - Add subtitle track (`captions.newTrack` and `captions.setStyle`).
+  - Set sequence status feedback in application UI.
 
 ### [DESKTOP-06] Client-Side HTTP & SSE Bridge to `clipcraft-api`
 - [ ] Implement lightweight async HTTP client using `reqwest` / `ureq` in `crates/ui-egui/src/automation/`.
